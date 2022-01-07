@@ -17,13 +17,13 @@ from django.shortcuts import get_object_or_404
 class ArticleViewsets(viewsets.ViewSet):
     
     def list(self,request):
-        articles = Article.objects.all()
-        serializer = ArticleSerializer(articles, many=True)
+        articles = Category.objects.all()
+        serializer = CategorySerializer(articles, many=True)
         return Response(serializer.data)
     
     
     def create(self,request):
-        serializer = ArticleSerializer(data=request.data)
+        serializer =CategorySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
