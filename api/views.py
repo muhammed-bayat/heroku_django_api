@@ -1,7 +1,7 @@
 from django.shortcuts import render,HttpResponse
 
-from .models import Article
-from .serializers import ArticleSerializer
+from .models import Article, Experiment, Category
+from .serializers import ArticleSerializer, ExperimentSerializer, CategorySerializer, ExperimentDetailSerializer
 from django.http import JsonResponse
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
@@ -128,3 +128,22 @@ def article_detail(request, pk):
         article.delete()
         return Response()(status=status.HTTP_204_NO_CONTENT)
 """
+
+
+
+
+class ExperimentListView(generics.ListAPIView):
+    serializer_class = ExperimentDetailSerializer
+
+    def get_queryset(self):
+        queryset = Experiment.objects.filter(category_id=self.kwargs['pk'])
+        return  queryset
+class CategoryListView(generics.ListAPIView):
+    serializer_class = CategorySerializer
+    queryset =  Category.objects.all()
+
+class ExperimentDetailView(generics.RetrieveAPIView):
+    serializer_class = ExperimentDetailSerializer
+    def get_object(self):
+        experiments = get_object_or_404(Experiment, pk=self.kwargs['pk'])
+        return experiments

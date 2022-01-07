@@ -1,7 +1,7 @@
  
 from django.contrib import admin
 from django.urls import path,include
-from .views import ArticleList, ArticleDetails ,ArticleViewsets
+from .views import *
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
@@ -10,6 +10,8 @@ router.register('articles', ArticleViewsets, basename='articles')
 
 urlpatterns = [
     path('', ArticleList.as_view()),
+    path('category/',CategoryListView.as_view()),
+    path('category/<int:pk>/',ExperimentDetailView.as_view()),
     path('api',include(router.urls)),
     path('articles/<int:pk>', ArticleDetails.as_view() ),
 
