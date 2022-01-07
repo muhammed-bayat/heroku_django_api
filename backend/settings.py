@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-w0-i-dexr3@ttq$(j1oc3v9buct_ma=i@p@w!$yl5tg5h86-fy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["192.168.1.105","django-api1.herokuapp.com","https://django-api1.herokuapp.com"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -36,7 +36,8 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -119,15 +120,14 @@ STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static') ]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Static files(CSS, JavaScript, Images)
-# https: //docs.djangoproject.com/en/1.9/howto/static-files/
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
-# Extra places
- 
+# Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-   os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
- 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
