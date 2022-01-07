@@ -9,7 +9,7 @@ router.register('articles', ArticleViewsets, basename='articles')
 
 
 urlpatterns = [
-    path('articles', ArticleList.as_view()),
+    path('', ArticleList.as_view()),
     path('api',include(router.urls)),
    # path('articles/<int:pk>', ArticleDetails.as_view() ),
 
