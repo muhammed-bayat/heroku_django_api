@@ -9,9 +9,9 @@ router.register('articles', ArticleViewsets, basename='articles')
 
 
 urlpatterns = [
-    path('', ArticleList.as_view()),
-    path('category/',CategoryListView.as_view()),
-    path('category/<int:pk>/',ExperimentDetailView.as_view()),
+    path('articles', ArticleList.as_view()),
+    path('',CategoryListView.as_view()),
+    path('<int:pk>/',ExperimentDetailView.as_view()),
     path('api',include(router.urls)),
     path('articles/<int:pk>', ArticleDetails.as_view() ),
 
